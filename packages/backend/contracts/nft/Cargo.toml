@@ -5,14 +5,7 @@ edition = "2021"
 authors = ["mashharuki"]
 
 [dependencies]
-
-ink_primitives = { version = "~3.4.0", default-features = false }
-ink_metadata = { version = "~3.4.0", default-features = false, features = ["derive"], optional = true }
-ink_env = { version = "~3.4.0", default-features = false }
-ink_storage = { version = "~3.4.0", default-features = false }
-ink_lang = { version = "~3.4.0", default-features = false }
-ink_prelude = { version = "~3.4.0", default-features = false }
-ink_engine = { version = "~3.4.0", default-features = false, optional = true }
+ink = { version = "4.2.0", default-features = false }
 
 scale = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive"] }
 scale-info = { version = "2", default-features = false, features = ["derive"], optional = true }
@@ -20,6 +13,9 @@ scale-info = { version = "2", default-features = false, features = ["derive"], o
 # Include brush as a dependency and enable default implementation for PSP34 via brush feature
 openbrush = { tag = "v2.3.0", git = "https://github.com/Supercolony-net/openbrush-contracts", default-features = false, features = ["psp34", "ownable"] }
 # payable_mint_pkg = { path = "../../logics", default-features = false }
+
+[dev-dependencies]
+ink_e2e = "4.2.0"
 
 [lib]
 name = "nft"
@@ -32,12 +28,7 @@ crate-type = [
 [features]
 default = ["std"]
 std = [
-    "ink_primitives/std",
-    "ink_metadata",
-    "ink_metadata/std",
-    "ink_env/std",
-    "ink_storage/std",
-    "ink_lang/std",
+    "ink/std",
     "scale/std",
     "scale-info/std",
 
