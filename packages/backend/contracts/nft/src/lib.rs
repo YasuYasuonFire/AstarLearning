@@ -6,9 +6,9 @@
  */   
 #[openbrush::contract]
 pub mod nft {
-    use ink_storage::traits::SpreadAllocate;
-	use ink_storage::Mapping;
-	use ink_prelude::string::{
+    // use ink::storage::traits::SpreadAllocate;
+	use ink::storage::Mapping;
+	use ink::prelude::string::{
 		String as PreludeString,
 		ToString,
 	};
@@ -21,7 +21,7 @@ pub mod nft {
 	use openbrush::contracts::psp34::extensions::enumerable::*;
 	use openbrush::contracts::psp34::extensions::metadata::*;
 
-	use ink_lang::codegen::{
+	use ink::codegen::{
 		EmitEvent,
 		Env,
 	};
@@ -30,7 +30,8 @@ pub mod nft {
 	 * コントラクトで扱う構造体
 	 */
     #[ink(storage)]
-    #[derive(Default, SpreadAllocate, Storage)]
+    // #[derive(Default, SpreadAllocate, Storage)]
+	#[derive(Default, Storage)]
     pub struct NFT {
     	#[storage_field]
 		psp34: psp34::Data<Balances>,
@@ -114,9 +115,9 @@ pub mod nft {
 			_instance._set_attribute(collection_id, String::from("baseUri"), String::from("https://gateway.pinata.cloud/ipfs/QmdwZBwsEKNpc9uUgUzsgiGb2uYM9X1aca9Ezgz1pR79Jo/"));
 			_instance.max_supply = 100_000_000_000_000_000;
 			_instance.last_token_id = 0;
-			ink_lang::utils::initialize_contract(|instance: &mut Self| {
-				instance.own_nfts = Mapping::default();
-			});
+			// ink::utils::initialize_contract(|instance: &mut Self| {
+			_instance.own_nfts = Mapping::default();
+			// });
 			_instance 
         }
 
@@ -313,8 +314,8 @@ pub mod nft {
     mod tests {
         use super::*;
         use crate::nft::PSP34Error::*;
-        use ink_env::test;
-        use ink_lang as ink;
+        use ink::env::test;
+        // use ink_lang as ink;
 
         const PRICE: Balance = 100_000_000_000_000_000;
 		const BASE_URI: &str = "https://gateway.pinata.cloud/ipfs/QmdwZBwsEKNpc9uUgUzsgiGb2uYM9X1aca9Ezgz1pR79Jo/";
@@ -331,7 +332,7 @@ pub mod nft {
 		 * set sender method
 		 */
 		fn set_sender(sender: AccountId) {
-            ink_env::test::set_caller::<Environment>(sender);
+            ink::env::test::set_caller::<Environment>(sender);
         }
 
 		/**
@@ -369,7 +370,7 @@ pub mod nft {
             assert_eq!(sh34.total_supply(), num_of_mints as u128);
             assert_eq!(sh34.balance_of(accounts.bob), 1);
             assert_eq!(sh34.owners_token_by_index(accounts.bob, 0), Ok(Id::U64(0)));
-			assert_eq!(1, ink_env::test::recorded_events().count());
+			assert_eq!(1, ink::env::test::recorded_events().count());
             assert_eq!(
                 sh34.owners_token_by_index(accounts.bob, 5),
                 Err(TokenNotExists)
@@ -389,7 +390,7 @@ pub mod nft {
 
             assert_eq!(sh34.total_supply(), 0);
 
-            test::set_value_transferred::<ink_env::DefaultEnvironment>(
+            test::set_value_transferred::<ink::env::DefaultEnvironment>(
                 PRICE * num_of_mints as u128,
             );
 
