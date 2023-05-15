@@ -30,7 +30,8 @@ export const BLOCKCHAINS = [
 
 export const TWITTER_URL = "https://twitter.com/HARUKI05758694";
 // 各コントラクトのアドレス(Shibuya Network)
-export const WASM_NFT_CONTRACT_ADDRESS = "ZjCB8QVKytLmGRGXVCHCuUMnMiQTWU2V3696zqnQiD9kjMg";
+// export const WASM_NFT_CONTRACT_ADDRESS = "ZjCB8QVKytLmGRGXVCHCuUMnMiQTWU2V3696zqnQiD9kjMg";
+export const WASM_NFT_CONTRACT_ADDRESS = "VxbUi1528XmTBNNvvAAU81L5KRzed8xHtu6Pv7hDnykpdTG"; //Migrated for ink! V4.0.0
 export const ASTAR_NFT_CONTRACT_ADDRESS = "a6WkJRaZcy6cVkvRQmRmd1TVhAc1Dfq3d7cmpGUjjn9736d";
 export const SHIDEN_NFT_CONTRACT_ADDRESS = "bezTq8fCqsG6X49e1KRmeVcatNWNaSHfNM218iHzFKPTxsk";
 
