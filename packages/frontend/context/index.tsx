@@ -277,7 +277,7 @@ export function ContractProvider({ children }: any) {
 
         // The actual result from RPC as `ContractExecResult`
         console.log(result.toHuman());
-
+        console.log(contentFlg);
         // check if the call was successful
         if (result.isOk) {
             const outputData: any = output;
