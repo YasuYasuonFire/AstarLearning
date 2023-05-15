@@ -362,7 +362,7 @@ pub mod nft {
 
             assert_eq!(sh34.total_supply(), 0);
 
-            test::set_value_transferred::<ink_env::DefaultEnvironment>(
+            test::set_value_transferred::<ink::env::DefaultEnvironment>(
                 PRICE * num_of_mints as u128,
             );
 
@@ -400,7 +400,7 @@ pub mod nft {
             assert_eq!(sh34.balance_of(accounts.bob), 2);
             assert_eq!(sh34.owners_token_by_index(accounts.bob, 0), Ok(Id::U64(0)));
 			assert_eq!(sh34.owners_token_by_index(accounts.bob, 1), Ok(Id::U64(1)));
-			assert_eq!(2, ink_env::test::recorded_events().count());
+			assert_eq!(2, ink::env::test::recorded_events().count());
             assert_eq!(
                 sh34.owners_token_by_index(accounts.bob, 5),
                 Err(TokenNotExists)
