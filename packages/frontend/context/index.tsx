@@ -158,6 +158,9 @@ export function ContractProvider({ children }: any) {
 
         let nfts:NftInfo[] = [];
 
+        //debug
+        console.log("[getNftInfos] balanceOf: ", balanceOf);
+
         if (balanceOf > 0) {
             let nftInfo = await getInfo(api, 'wasm');
             nfts.push(nftInfo); 
@@ -282,7 +285,11 @@ export function ContractProvider({ children }: any) {
         if (result.isOk) {
             const outputData: any = output;
             console.log('own nft count:', outputData.toString());
-            return Number(outputData.toString());
+            //outputDataから、数値のみを取り出す
+            const jsonObject = JSON.parse(outputData);
+            const numberValue = jsonObject.ok;
+            // return Number(outputData.toString());
+            return numberValue;
         } else {
             return 0;
         }
@@ -303,6 +310,11 @@ export function ContractProvider({ children }: any) {
         // call getNftDescription メソッド
         const discription = await getNftDecription(api, contentFlg);
         
+        //debug
+        console.log("[getInfo] name: ", name);
+        console.log("[getInfo] image: ", image);
+        console.log("[getInfo] description: ", discription);
+
         // NFTの情報を格納する変数
         let nftInfo: NftInfo = {
             name: name,
