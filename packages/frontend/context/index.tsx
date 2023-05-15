@@ -286,8 +286,8 @@ export function ContractProvider({ children }: any) {
             const outputData: any = output;
             console.log('own nft count:', outputData.toString());
             //outputDataから、数値のみを取り出す
-            const jsonObject = JSON.parse(outputData);
-            const numberValue = jsonObject.ok;
+            const jsonData = JSON.parse(outputData);
+            const numberValue:number = jsonData.ok;
             // return Number(outputData.toString());
             return numberValue;
         } else {
@@ -360,7 +360,7 @@ export function ContractProvider({ children }: any) {
             const outputData: any = output;
             // json形式にして再び取得する。
             const jsonData = JSON.parse(outputData.toString());
-            const name:string = jsonData.ok;
+            const name:string = jsonData.ok.ok;//ink! V4で"ok: {ok: 'WasmNFT'}"の形式で返却されることへの対応
             return name;
         } else {
             console.error('error');
@@ -402,7 +402,7 @@ export function ContractProvider({ children }: any) {
             const outputData: any = output;
             // json形式にして再び取得する。
             const jsonData = JSON.parse(outputData.toString());
-            const image:string = jsonData.ok;
+            const image:string = jsonData.ok.ok;
             return image;
         } else {
             console.error('error');
@@ -444,7 +444,7 @@ export function ContractProvider({ children }: any) {
             const outputData: any = output;
             // json形式にして再び取得する。
             const jsonData = JSON.parse(outputData.toString());
-            const description:string = jsonData.ok;
+            const description:string = jsonData.ok.ok;
             return description;
         } else {
             console.error('error');
