@@ -16,7 +16,7 @@ jobs:
       - name: Install packages
         run: yarn
       - name: Install swanky
-        run: yarn install @astar-network/swanky-cli --version 2.1.2
+        run: yarn install -g @astar-network/swanky-cli --version 2.1.2
       - name: Check swanky installed
         run: swanky -v
 
