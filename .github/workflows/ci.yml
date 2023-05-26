@@ -13,12 +13,7 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-{{ checksum "patches.hash" }}
-      - name: Install packages
-        run: yarn
-      - name: Install swanky
-        run: npm install -g @astar-network/swanky-cli@2.1.2
-      - name: Check swanky installed
-        run: swanky -v
+      
 
   rust-setup:
     runs-on: ubuntu-latest
@@ -96,6 +91,11 @@ jobs:
       - name: Content SmartContract build by cargo contract
         run: yarn build:content
           
+      - name: Install swanky
+        run: npm install -g @astar-network/swanky-cli@2.1.2
+      - name: Check swanky installed
+        run: swanky -v
+
       - name: All SmartContract build by swanky
         run: yarn compile:all
 
