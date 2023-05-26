@@ -72,17 +72,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Restore Cache
+      - name: Restore cargo Cache 
         uses: actions/cache@v3
         with:
           path: ~/.cargo
           key: ${{ runner.os }}-rust-${{ hashFiles('rust-toolchain.toml') }}
           restore-keys: |
             ${{ runner.os }}-rust
+
+      - name: Restore package Cache
+        uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-{{ checksum "patches.hash" }}
+
       - name: NFT SmartContract build by cargo contract
         run: yarn build:nft
       - name: Content SmartContract build by cargo contract
         run: yarn build:content
+          
       - name: All SmartContract build by swanky
         run: yarn compile:all
 
